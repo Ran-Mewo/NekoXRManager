@@ -17,7 +17,6 @@ android {
 
         buildConfigField 'String',  'APPLICATION_NAME', '"NekoXRManager"'
         buildConfigField 'String',  'TAG',              '"NekoXR"'
-        buildConfigField 'long',    'ARCORE_TARGET_VERSION_CODE', '253140493L'
     }
 
     buildTypes {

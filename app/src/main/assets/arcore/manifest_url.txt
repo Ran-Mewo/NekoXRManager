@@ -1,1 +1,0 @@
-https://raw.githubusercontent.com/Ran-Mewo/NekoXRManager/main/dist/manifest.json
