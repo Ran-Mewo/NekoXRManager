@@ -1,22 +1,24 @@
 {
   "schema_version": 1,
   "latest": {
-    "version_code": 253140493,
-    "version_name": "1.52.253140493",
+    "version_code": 260890493,
+    "version_name": "1.54.260890493",
     "min_sdk": 31,
     "abis": {
       "arm64-v8a": {
-        "url": "https://raw.githubusercontent.com/Ran-Mewo/NekoXRManager/main/dist/cdn/arcore_v253140493_arm64-v8a.apk",
-        "sha256": "99561ea8eab44cad2dffdb36d60d641bba4d86a16bf8ea1c969b43a80d64145f",
-        "size": 61621437
+        "url": "https://github.com/Ran-Mewo/NekoXRManager/releases/download/arcore-v260890493/arcore_v260890493_arm64-v8a.apk",
+        "sha256": "109fd1c70843f8753124bc93f9e843c9ef61a7f450fe346166ff42fb96eac67e",
+        "size": 75341088
       }
     }
   },
-  "compatible_versions": [253140493],
+  "compatible_versions": [
+    260890493,
+    253140493
+  ],
   "patch_sets": {
     "default_arm64": "generic_arm64.json",
     "overrides": {}
   },
-  "min_patcher_version": 1,
-  "_comment": "ARCore 1.52 (vc 253140493) — single-APK from APKMirror; lib/arm64-v8a/libarcore_c.so is the only ABI shipping the native core. armeabi-v7a path only contains libhardware_buffer_stream_jni.so. Update per UPDATE_ARCORE.md §4.7-4.8 when shipping a release."
+  "min_patcher_version": 1
 }
