@@ -1,0 +1,56 @@
+name: Refresh ARCore manifest
+
+on:
+  schedule:
+    # Weekly, Mondays 07:17 UTC. Off-peak minute to avoid the :00 herd.
+    - cron: "17 7 * * 1"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Resolve + download but don't upload or commit"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-arcore
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install --no-cache-dir requests
+
+      - name: Run refresher
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            python tools/refresh_arcore.py --dry-run
+          else
+            python tools/refresh_arcore.py
+          fi
+
+      - name: Commit manifest changes
+        if: ${{ inputs.dry_run != true }}
+        run: |
+          if git diff --quiet dist/manifest.json; then
+            echo "no manifest changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/manifest.json
+          vc=$(python -c "import json; print(json.load(open('dist/manifest.json'))['latest']['version_code'])")
+          git commit -m "arcore: refresh manifest to vc ${vc}"
+          git push

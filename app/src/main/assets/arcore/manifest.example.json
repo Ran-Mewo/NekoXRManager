@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "latest": {
+    "version_code": 253140493,
+    "version_name": "1.52.0",
+    "min_sdk": 31,
+    "abis": {
+      "arm64-v8a": {
+        "url": "https://example.invalid/arcore_v253140493_arm64-v8a.apk",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "size": 0
+      }
+    }
+  },
+  "compatible_versions": [253140493],
+  "patch_sets": {
+    "default_arm64": "generic_arm64.json",
+    "overrides": {}
+  },
+  "min_patcher_version": 1,
+  "_comment": "v1 placeholder. Update this file when shipping ARCore mirrors per UPDATE_ARCORE.md §4.7-4.8."
+}

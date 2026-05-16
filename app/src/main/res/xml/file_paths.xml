@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- For sharing patched APKs to the system PackageInstaller dialog. -->
+    <external-cache-path name="neko_cache" path="neko/" />
+    <cache-path name="cache" path="/" />
+</paths>

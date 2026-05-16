@@ -1,0 +1,106 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+}
+
+android {
+    namespace 'dev.lewds.ran.nekoxrmanager'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'dev.lewds.ran.nekoxrmanager'
+        minSdk 28
+        targetSdk 34
+        versionCode 1
+        versionName '0.1.0'
+
+        buildConfigField 'String',  'APPLICATION_NAME', '"NekoXRManager"'
+        buildConfigField 'String',  'TAG',              '"NekoXR"'
+        buildConfigField 'long',    'ARCORE_TARGET_VERSION_CODE', '253140493L'
+    }
+
+    buildTypes {
+        debug {
+            // explicit; signed with debug key
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    buildFeatures {
+        compose true
+        buildConfig true
+    }
+
+    sourceSets {
+        main {
+            // Co-locate Java + Kotlin under separate roots; both compile cleanly.
+            java.srcDirs += 'src/main/kotlin'
+        }
+    }
+
+    packaging {
+        jniLibs {
+            useLegacyPackaging = false
+            excludes += '/lib/x86/*.so'
+            excludes += '/lib/x86_64/*.so'
+        }
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+            excludes += '/META-INF/versions/9/OSGI-INF/MANIFEST.MF'
+            excludes += '/META-INF/versions/**/module-info.class'
+        }
+    }
+}
+
+dependencies {
+    // AndroidX
+    implementation libs.bundles.androidx
+
+    // Compose
+    implementation libs.bundles.compose
+    implementation libs.compose.ui.tooling.preview
+    debugImplementation libs.compose.ui.tooling
+
+    // DI / Navigation (UI-side Kotlin)
+    implementation libs.bundles.koin
+    implementation libs.bundles.voyager
+
+    // Permissions helper
+    implementation libs.accompanist.permissions
+
+    // JSON / HTTP (Java)
+    implementation libs.moshi
+    implementation libs.okhttp
+
+    // Patching (Java)
+    implementation libs.apksig
+    implementation libs.axml
+    // axml hard-depends on slf4j-api at class-init; we don't care about its logs.
+    implementation libs.slf4j.api
+    runtimeOnly libs.slf4j.nop
+    implementation libs.bouncycastle
+    implementation libs.zip
+    implementation libs.dexlib2
+
+    // Shizuku
+    implementation libs.bundles.shizuku
+    implementation libs.hiddenApi.bypass
+}
+
+configurations.configureEach {
+    exclude group: 'com.google.guava', module: 'listenablefuture'
+    exclude group: 'org.checkerframework', module: 'checker-qual'
+}

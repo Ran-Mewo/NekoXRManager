@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">NekoXRManager</string>
+
+    <!-- Step groups -->
+    <string name="step_group_prepare">Prepare</string>
+    <string name="step_group_patch">Patch</string>
+    <string name="step_group_sign">Sign</string>
+    <string name="step_group_install">Install</string>
+    <string name="step_group_verify">Verify</string>
+
+    <!-- Step names -->
+    <string name="step_fetch_manifest">Fetch release manifest</string>
+    <string name="step_download_arcore">Download ARCore APK</string>
+    <string name="step_pick_apk">Select ARCore APK</string>
+    <string name="step_check_shizuku">Check Shizuku</string>
+    <string name="step_harvest_device">Harvest device intrinsics</string>
+    <string name="step_extract_apk">Extract APK</string>
+    <string name="step_load_patchset">Load patch set</string>
+    <string name="step_load_profile">Load device profile</string>
+    <string name="step_native_patch">Patch libarcore_c.so</string>
+    <string name="step_inject_profile">Inject device profile</string>
+    <string name="step_patch_manifest">Patch AndroidManifest</string>
+    <string name="step_bypass_consumer_sig">Bypass ARCore signature check</string>
+    <string name="step_save_metadata">Save install metadata</string>
+    <string name="step_repackage">Repackage APK</string>
+    <string name="step_sign">Sign APK</string>
+    <string name="step_uninstall_stock">Uninstall stock ARCore</string>
+    <string name="step_install">Install patched ARCore</string>
+    <string name="step_verify_service">Verify ARCore service</string>
+</resources>

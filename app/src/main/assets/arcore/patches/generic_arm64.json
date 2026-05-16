@@ -1,0 +1,20 @@
+{
+  "id": "generic-arm64-v1",
+  "comment": "Spoofs ARCore's containsMatchingProfile gate so the SDK accepts unsupported devices (INMO Air 3 and similar). Validated against ARCore 1.52 vc 253140493. Replacement convention: ?? in replacement = preserve original byte at that position.",
+  "abi": "arm64-v8a",
+  "so": "lib/arm64-v8a/libarcore_c.so",
+  "patches": [
+    {
+      "name": "CalibrationContentResolver.containsMatchingProfile -> true",
+      "symbol": "Java_com_google_ar_core_services_CalibrationContentResolver_containsMatchingProfile",
+      "anchor": { "kind": "symbol", "name": "Java_com_google_ar_core_services_CalibrationContentResolver_containsMatchingProfile" },
+      "patterns": [
+        {
+          "comment": "Anchored on the b.ne to stack_chk_fail (?? ?? ?? 54) immediately followed by 'and w0,w19,1' (60 02 00 12) and the canonical 0x60-frame epilogue (ldp/ldr/add sp/ret). Patches the AND to 'mov w0,#1' (20 00 80 52) so the function returns 1 unconditionally while the calls and cleanup above run normally.",
+          "sig":         "?? ?? ?? 54 60 02 00 12 f4 4f 45 a9 fe 23 40 f9 ff 83 01 91 c0 03 5f d6",
+          "replacement": "?? ?? ?? ?? 20 00 80 52 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ??"
+        }
+      ]
+    }
+  ]
+}

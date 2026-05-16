@@ -1,0 +1,34 @@
+{
+  "_schema": {
+    "match.manufacturer": "lowercased substring of Build.MANUFACTURER",
+    "match.model": "lowercased substring of Build.MODEL",
+    "fingerprintHashKeys": "6-char base64url keys ARCore hashes from MANUFACTURER/BRAND/PRODUCT and looks up in profiles.toc. Harvest by running stock ARCore and scraping 'device_profile_database_helpers.cc Considering ...' from logcat.",
+    "cameraExtrinsicQuat": "(w, x, y, z) camera-to-IMU rotation. Derived from Camera2 SENSOR_ORIENTATION: 90° = (0, -√½, +√½, 0); 270° = (0, -√½, -√½, 0); 180° = (0, 0, 0, 1).",
+    "captureWidth/Height/fps": "must satisfy width * height <= 3_000_000"
+  },
+  "devices": [
+    {
+      "name": "INMO Air 3",
+      "match": { "manufacturer": "INMO", "model": "IMA301" },
+      "fingerprint": "INMO/IMA301/IMA301:14/UKQ1.240506.001/20251011:user/release-keys",
+      "fingerprintHashKeys": ["3-mMfS", "Om3e72"],
+      "cameraId": "0",
+      "captureWidth": 1920,
+      "captureHeight": 1080,
+      "fps": 30,
+      "focalX": 923.711,
+      "focalY": 923.711,
+      "principalX": 960.0,
+      "principalY": 540.0,
+      "k0": 0.0,
+      "k1": 0.0,
+      "k2": 0.0,
+      "gyroNoiseSigma":  0.0005309,
+      "gyroBiasSigma":   0.0001413,
+      "accelNoiseSigma": 0.0048836,
+      "accelBiasSigma":  0.0125893,
+      "cameraExtrinsicQuat": [0.0, -0.70710678118654746, -0.70710678118654746, 0.0],
+      "notes": "Temple-mounted sideways camera (SENSOR_ORIENTATION=270). icm4x6xx IMU."
+    }
+  ]
+}
